@@ -159,6 +159,9 @@ class Vista
         img.style.height = alto*1.5 +'px';
         this.contenedor.appendChild(img);
         
+        const sound = new Audio('sound/explosion.wav'); //Declaramos el audio
+        sound.play(); //Inicializamos el audio
+
         setTimeout(()=>{img.remove()}, 750) //elimina la animación cuando completa un ciclo
     }
     ganador()
