@@ -23,6 +23,7 @@ class App
         this.vista.puntuacion(this.modelo.puntuacion);
         this.vista.generarBolas(this.modelo.cantidadBolas); //Llamamos a generar las bolas, podriamos llamarlo si clica algun boton
         this.animador = window.setInterval(this.vista.moverBolas.bind(this.vista), 200); // nuestra animador llamara cada cierto intervalo de tiempo a la funcion de movimiento, el animador pertenece al controlador y verlas moviendose a la vista
+
     }
     verificar(evento)
     {
@@ -30,6 +31,8 @@ class App
         let textoBola = bola.childNodes[0].nodeValue; //Saca el nodo de texto de la bola, es decir el numero a coparar si el multiplo
         let multiplo = document.getElementById('numeroAside'); //tomamos el elemento numeroAside que tiene el multiplo
         let textMultiplo = multiplo.childNodes[0].nodeValue; //Saca el nodo de texto de multiplo
+
+        const sound4 = new Audio('sound/error.wav');//Audio declarado
 
         if (textoBola % textMultiplo == 0)
         {
@@ -40,6 +43,7 @@ class App
         {
             this.vista.cambiarClase(bola,'bolaError');
             this.vista.puntuar(-10);
+            sound4.play();//Inicializar audio
         }
     }
     finPrograma()
@@ -159,10 +163,10 @@ class Vista
         img.style.height = alto*1.5 +'px';
         this.contenedor.appendChild(img);
         
-        const sound = new Audio('sound/explosion.wav'); //Declaramos el audio
-        sound.play(); //Inicializamos el audio
+        const sound1 = new Audio('sound/explosion.wav');//Audio declarado
+        sound1.play();//Play audio
 
-        setTimeout(()=>{img.remove()}, 750) //elimina la animación cuando completa un ciclo
+        setTimeout(()=>{img.remove()}, 750)//elimina la animación cuando completa un ciclo
     }
     ganador()
     {
@@ -173,6 +177,9 @@ class Vista
         this.contenedor.appendChild(mensaje);//Añade el mensaje al contenedor
         mensaje.style.top = (this.contenedor.clientHeight/2)-(mensaje.clientHeight/2) + 'px'; //Colocamos las medidas por defecto de los div en top, le restamos la mitad de su tamaño
         mensaje.style.left = (this.contenedor.clientWidth/2)-(mensaje.clientWidth/2)  + 'px';//Colocamos las medidas por defecto de los div en left, le restamos la mitad de su tamaño
+        
+        const sound2 = new Audio('sound/victoria.wav');//Audio declarado
+        sound2.play();//Play audio
     }
     perdedor()
     {
@@ -183,6 +190,9 @@ class Vista
         this.contenedor.appendChild(mensaje);//Añade el mensaje al contenedor
         mensaje.style.top = (this.contenedor.clientHeight/2)-(mensaje.clientHeight/2) + 'px'; //Colocamos las medidas por defecto de los div en top, le restamos la mitad de su tamaño
         mensaje.style.left = (this.contenedor.clientWidth/2)-(mensaje.clientWidth/2)  + 'px';//Colocamos las medidas por defecto de los div en left, le restamos la mitad de su tamaño
+
+        const sound3 = new Audio('sound/derrota.wav');//Audio declarado
+        sound3.play();//Play audio
     }
 }
 /**
